@@ -14,13 +14,27 @@ class Product(models.Model):
 	title = models.CharField(max_length=25,null=True)
 	description = models.TextField(null=True,blank=True)
 	price = models.FloatField()
-	quantity = models.IntegerField()
+	quantity = models.PositiveIntegerField(default=1)
+	sold = models.PositiveIntegerField(default=0)
 	categories = models.ManyToManyField('Category')
-
+	date_added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+	isdiscount = models.BooleanField(default=False)
+	new_price = models.FloatField(null = True, blank=True)
 	#image
 
 	def __str__(self):
 		return self.title
+
+
+
+	def average(self):
+		reviews = self.review_set.all()
+		if reviews:
+			ratings = [review.rating for review in reviews]
+			return sum(ratings) / len(reviews)
+		else:
+			return 0  # Handle the case when there are no reviews.
+
 
 
 
