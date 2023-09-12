@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from . models import Product
 from django.db.models import Avg
 
@@ -30,11 +30,12 @@ def store(request):
 	return render(request,'store/store.html',context)
 
 
-def checkout(request):
-	context = {}
+def checkout(request,product_id):
+	
+	context = {'product':product}
 	return render(request,'store/checkout.html',context)
 
-def product(request):
-	product = Product.objects.all()[0]
+def product(request,product_id):
+	product = get_object_or_404(Product,id = product_id)
 	context = {'product':product}
 	return render(request,'store/product.html',context)

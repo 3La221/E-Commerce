@@ -50,6 +50,10 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 					</ul>
+
+					<ul class="header-links pull-right">
+						<li><a href="#"><i class="fa fa-user-o"></i> Login/ Sign Up</a></li>
+					</ul>
 				
 				</div>
 			</div>
@@ -86,7 +90,6 @@
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->
-
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
@@ -154,6 +157,7 @@
 							</div>
 						</div>
 						<!-- /ACCOUNT -->
+						
 					</div>
 					<!-- row -->
 				</div>
@@ -255,7 +259,7 @@
 										{% for product in latest_products %}
 										<div class="product">
 											<div class="product-img">
-												<img src="{% static 'images/product01.png' %}" alt="">
+												<img src="{{product.image.url}}" alt="">
 											</div>
 											<div class="product-body">
    											 <p class="product-category">
@@ -267,7 +271,7 @@
 
 												{% endfor %}
    											</p>
-												<h3 class="product-name"><a href="#">{{product}}</a></h3>
+												<h3 class="product-name"><a href="{% url 'product' product.id %}">{{product}}</a></h3>
 												<h4 class="product-price">{{product.price}}</h4>
 												<div class="product-rating">
 													
@@ -308,7 +312,8 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<a href=""></a>
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Place Order</button>
 											</div>
 										</div>
 										{% endfor %}
@@ -357,7 +362,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-											<img src="{% static 'images/product04.png' %}" alt="">
+											<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
  										<p class="product-category">
@@ -381,7 +386,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-											<img src="{% static 'images/product04.png' %}" alt="">
+											<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
 									 <p class="product-category">
@@ -422,7 +427,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
  											<p class="product-category">
@@ -450,7 +455,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
 									 <p class="product-category">
@@ -489,7 +494,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">
@@ -513,7 +518,7 @@
 								<!-- product widget -->
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
