@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,13 +15,27 @@ class Product(models.Model):
 	title = models.CharField(max_length=25,null=True)
 	description = models.TextField(null=True,blank=True)
 	price = models.FloatField()
-	quantity = models.IntegerField()
+	quantity = models.PositiveIntegerField(default=1)
+	sold = models.PositiveIntegerField(default=0)
 	categories = models.ManyToManyField('Category')
-
-	#image
+	date_added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+	isdiscount = models.BooleanField(default=False)
+	new_price = models.FloatField(null = True, blank=True , default='product02.png')
+	image = models.ImageField(default = "pc.png" ,null = True, blank = True)
 
 	def __str__(self):
 		return self.title
+
+
+
+	def average(self):
+		reviews = self.review_set.all()
+		if reviews:
+			ratings = [review.rating for review in reviews]
+			return sum(ratings) / len(reviews)
+		else:
+			return 0  # Handle the case when there are no reviews.
+
 
 
 
@@ -57,19 +72,25 @@ class OrderItem(models.Model):
 	transaction_id = models.CharField(max_length=200,null=True)
 
 
+class Customer(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE,null = True,blank=True)
+	name = models.CharField(max_length=200,null=True)
+	email = models.CharField(max_length=200,null=True)
+
+	def __str__(self):
+		return self.name
+
 
 class Order(models.Model):
 	id = models.UUIDField(
 		default=uuid.uuid4,unique=True,
 		primary_key=True,editable=False
 		)
-	first_name = models.CharField(max_length=50)
-	last_name = models.CharField(max_length=50)
-	email = models.CharField(max_length=50)
+	customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True,blank=True)
 	address = models.CharField(max_length=100)
 	wilaya = models.CharField(max_length=50)
 	zip_code = models.IntegerField()
 	telephone = models.IntegerField()
 
 	def __str__(self):
-		return self.last_name + " Order " + str(self.id)
+		return  " Order " + str(self.id)

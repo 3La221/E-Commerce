@@ -91,84 +91,7 @@
 						</div>
 						<!-- /SEARCH BAR -->
 
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
-
-								<!-- Cart -->
-								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
-									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-											<div class="product-widget">
-												<div class="product-img">
-										<img src="{% static 'images/product05.png' %}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
-								</div>
-								<!-- /Cart -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
+					
 					</div>
 					<!-- row -->
 				</div>
@@ -214,20 +137,25 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 							</div>
 
 							<div class="product-preview">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 							</div>
 
 							<div class="product-preview">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 							</div>
 
 							<div class="product-preview">
-										<img src="{% static 'images/product05.png' %}" alt="">
+										<img src="{{product.image.url}}" alt="">
 							</div>
+
+							
+
+
+						
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -236,6 +164,11 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
+										<img src="{{product.image.url}}" alt="">
+							</div>
+
+
+							<!-- <div class="product-preview">
 										<img src="{% static 'images/product05.png' %}" alt="">
 							</div>
 
@@ -245,11 +178,7 @@
 
 							<div class="product-preview">
 										<img src="{% static 'images/product05.png' %}" alt="">
-							</div>
-
-							<div class="product-preview">
-										<img src="{% static 'images/product05.png' %}" alt="">
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -257,7 +186,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">product name goes here</h2>
+							<h2 class="product-name">{{product}}</h2>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -269,10 +198,10 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">7500Da</h3>
+								<h3 class="product-price">{{product.price}}</h3>
 								<span class="product-available">In Stock</span>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p>{{product.description}}</p>
 
 							
 
@@ -294,8 +223,9 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								{% for category in product.categories.all %}
+								<li><a href="#">{{category}}</a></li>
+								{% endfor %}
 							</ul>
 
 							<ul class="product-links">
