@@ -69,7 +69,12 @@ class OrderItem(models.Model):
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
 	order = models.ForeignKey('Order',on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=1)
-	transaction_id = models.CharField(max_length=200,null=True)
+	
+	@property
+	def get_total(self):
+
+		return (self.product.price * self.quantity)
+	
 
 
 class Customer(models.Model):
@@ -90,7 +95,24 @@ class Order(models.Model):
 	address = models.CharField(max_length=100)
 	wilaya = models.CharField(max_length=50)
 	zip_code = models.IntegerField()
-	telephone = models.IntegerField()
+	complete = models.BooleanField(default=False)
+	telephone = models.CharField(max_length=16)
+	transaction_id = models.CharField(max_length=200,null=True)
+
+	@property
+	def get_cart_total(self):
+		orderitems = self.orderitem_set.all()
+		total = [item.get_total for item in orderitems]
+		return sum(total)
+
+
+	@property
+	def get_cart_items(self):
+		orderitems = self.orderitem_set.all()
+		total = [item.quantity for item in orderitems]
+		return sum(total)
+	
+
 
 	def __str__(self):
 		return  " Order " + str(self.id)
