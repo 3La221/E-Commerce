@@ -181,14 +181,12 @@
 								<div><strong>TOTAL</strong></div>
 							</div>
 							<div class="order-products">
+								{%for item in order.orderitem_set.all%}
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
+									<div>x{{item.quantity}} {{item.product}}</div>
+									<div>{{item.get_total}}</div>
 								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
+								{% endfor %}
 							</div>
 							<div class="order-col">
 								<div>Shiping</div>
@@ -196,7 +194,7 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div><strong class="order-total">{{order.get_cart_total}}</strong></div>
 							</div>
 						</div>
 						
