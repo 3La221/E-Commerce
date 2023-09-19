@@ -140,7 +140,7 @@
 													<h3 class="product-name"><a href="#">{{item.product}}</a></h3>
 													<h4 class="product-price"><span class="qty">{{item.quantity}}x</span>{{item.product.price}}</h4>
 												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+												<button data-product={{item.product.id}} data-action="remove"  class="delete update-cart"><i class="fa fa-close"></i></button>
 											</div>
 											{% endfor %}
 
@@ -160,7 +160,7 @@
 											<h5>SUBTOTAL: {{order.get_cart_total}}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+											<a href="#" data-order={{order.id}}  id="reset-cart" data-action="reset" >Reset Cart</a>
 											<a href="{% url 'checkout' order.id %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
