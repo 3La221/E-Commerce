@@ -39,6 +39,27 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<script type="text/javascript">
+			var user = '{{request.user}}'
+			function getToken(name) {
+			    let cookieValue = null;
+			    if (document.cookie && document.cookie !== '') {
+			        const cookies = document.cookie.split(';');
+			        for (let i = 0; i < cookies.length; i++) {
+			            const cookie = cookies[i].trim();
+			            // Does this cookie string begin with the name we want?
+			            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+			                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			                break;
+			            }
+			        }
+			    }
+			    return cookieValue;
+			}
+			const csrftoken = getToken('csrftoken');
+
+		</script>
+
     </head>
 	<body>
 		<!-- HEADER -->
@@ -121,8 +142,8 @@
 													<h3 class="product-name"><a href="#">{{item.product}}</a></h3>
 													<h4 class="product-price"><span class="qty">{{item.quantity}}x</span>{{item.product.price}}</h4>
 												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+													<button data-product={{item.product.id}} data-action="remove"  class="delete update-cart"><i class="fa fa-close"></i></button>											</div>
+
 											{% endfor %}
 
 											<!-- <div class="product-widget">
@@ -141,7 +162,7 @@
 											<h5>SUBTOTAL: {{order.get_cart_total}}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+										<a href="#" data-order={{order.id}}  id="reset-cart" data-action="reset" >Reset Cart</a>
 											<a href="{% url 'checkout' order.id %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
@@ -277,12 +298,12 @@
 								<div class="qty-label">
 									Qty
 									<div class="input-number">
-										<input type="number">
+										<input type="number" id="quantity-input">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<button data-product={{product.id}} data-action="add" class="add-to-cart-btn update-cart"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 
 							<ul class="product-btns">
@@ -649,6 +670,8 @@
 		<script src="{% static 'js/nouislider.min.js' %}"></script>
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
+		<script src="{% static 'js/cart.js' %}"></script>
+
 
 	</body>
 </html>

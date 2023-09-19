@@ -102,28 +102,55 @@
 
 	/////////////////////////////////////////
 
-	// Input number
-	$('.input-number').each(function() {
-		var $this = $(this),
-		$input = $this.find('input[type="number"]'),
-		up = $this.find('.qty-up'),
-		down = $this.find('.qty-down');
+	// // Input number
+	// $('.input-number').each(function() {
+	// 	var $this = $(this),
+	// 	$input = $this.find('input[type="number"]'),
+	// 	up = $this.find('.qty-up'),
+	// 	down = $this.find('.qty-down');
 
-		down.on('click', function () {
-			var value = parseInt($input.val()) - 500;
-			value = value < 1 ? 1 : value;
-			$input.val(value);
-			$input.change();
-			updatePriceSlider($this , value)
-		})
+	// 	down.on('click', function () {
+	// 		var value = parseInt($input.val()) - 500;
+	// 		value = value < 1 ? 1 : value;
+	// 		$input.val(value);
+	// 		$input.change();
+	// 		updatePriceSlider($this , value)
+	// 	})
 
-		up.on('click', function () {
-			var value = parseInt($input.val()) + 500;
-			$input.val(value);
-			$input.change();
-			updatePriceSlider($this , value)
-		})
-	});
+	// 	up.on('click', function () {
+	// 		var value = parseInt($input.val()) + 500;
+	// 		$input.val(value);
+	// 		$input.change();
+	// 		updatePriceSlider($this , value)
+	// 	})
+	// });
+// ...
+
+$('.input-number').each(function() {
+	var $this = $(this),
+	$input = $this.find('input[type="number"]'),
+	up = $this.find('.qty-up'),
+	down = $this.find('.qty-down');
+
+
+	down.on('click', function () {
+		var value = parseInt($input.val()) - 500;
+		value = value < 1 ? 1 : value; // Ensure the value is not less than 1
+		$input.val(value);
+		$input.change();
+		updatePriceSlider($this , value)
+	})
+
+	up.on('click', function () {
+		var value = parseInt($input.val()) + 500; // Increment the value by 1
+		$input.val(value);
+		$input.change();
+		updatePriceSlider($this , value)
+	})
+});
+
+// ...
+
 
 	var priceInputMax = document.getElementById('price-max'),
 			priceInputMin = document.getElementById('price-min');
@@ -167,3 +194,4 @@
 	}
 
 })(jQuery);
+

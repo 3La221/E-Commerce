@@ -68,7 +68,7 @@ class Category(models.Model):
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
 	order = models.ForeignKey('Order',on_delete=models.CASCADE)
-	quantity = models.IntegerField(default=1)
+	quantity = models.IntegerField(default=0)
 	
 	@property
 	def get_total(self):
