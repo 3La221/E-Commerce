@@ -45,7 +45,6 @@ class Review(models.Model):
 		primary_key=True,editable=False
 		)
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
-	name = models.CharField(max_length=25)
 	description = models.TextField(null=True,blank=True)
 	rating = models.IntegerField(default=5)
 	created = models.DateTimeField(auto_now_add=True)
@@ -92,12 +91,14 @@ class Order(models.Model):
 		primary_key=True,editable=False
 		)
 	customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True,blank=True)
+	first_name = models.CharField(max_length=50,null=True)
+	last_name = models.CharField(max_length=50,null=True)
 	address = models.CharField(max_length=100)
 	wilaya = models.CharField(max_length=50)
-	zip_code = models.IntegerField()
+	# zip_code = models.IntegerField(null=True)
 	complete = models.BooleanField(default=False)
 	telephone = models.CharField(max_length=16)
-	transaction_id = models.CharField(max_length=200,null=True)
+	# transaction_id = models.CharField(max_length=200,null=True)
 
 	@property
 	def get_cart_total(self):

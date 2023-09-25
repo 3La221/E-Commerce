@@ -193,5 +193,7 @@ $('.input-number').each(function() {
 		});
 	}
 
+	
+
 })(jQuery);
 
