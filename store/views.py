@@ -1,10 +1,13 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Avg
 from . models import Product,Order,OrderItem,Category
 import uuid,json
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from .filter import ProductFilter
+from .forms import ShippingForm
+
+
 
 
 
@@ -98,7 +101,23 @@ def store(request):
 
 def checkout(request,order_id):
 	order = get_object_or_404(Order,id=order_id)
-	context = {'order':order}
+
+	if request.method =="POST":
+		form = ShippingForm(request.POST)
+		if form.is_valid():
+			
+			order = form.save(commit=False)
+			order.customer = request.user.customer
+			order.complete = True
+			order.save() 
+			order = Order.objects.get(customer=request.user.customer,complete=False)
+			order.orderitem_set.all().delete()
+
+			return redirect('main')
+	form = ShippingForm()
+
+
+	context = {'order':order,'form':form}
 	return render(request,'store/checkout.html',context)
 
 def product(request,product_id):
