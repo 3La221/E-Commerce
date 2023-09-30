@@ -130,7 +130,7 @@ textarea.input {
 
 /*-- Number input --*/
 
-.input-number {
+.input-number , .qty-number{
   position: relative;
 }
 
@@ -139,7 +139,12 @@ textarea.input {
   margin: 0;
 }
 
-.input-number input[type="number"] {
+.qty-number input[type="number"]::-webkit-inner-spin-button, .qty-number input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-number input[type="number"] , .qty-number  input[type="number"]{
   -moz-appearance: textfield;
   height: 40px;
   width: 100%;
@@ -148,7 +153,7 @@ textarea.input {
   padding: 0px 35px 0px 15px;
 }
 
-.input-number .qty-up, .input-number .qty-down {
+.input-number .qty-up, .input-number .qty-down , .qty-number .qty-down , .qty-number .qty-up {
   position: absolute;
   display: block;
   width: 20px;
@@ -164,18 +169,22 @@ textarea.input {
   user-select: none;
 }
 
-.input-number .qty-up {
+.input-number .qty-up , .qty-number .qty-up{
   right: 0;
   top: 0;
   border-bottom: 0px;
 }
 
-.input-number .qty-down {
+.input-number .qty-down , .qty-number .qty-down{
   right: 0;
   bottom: 0;
 }
 
 .input-number .qty-up:hover, .input-number .qty-down:hover {
+  background-color: #E4E7ED;
+  color: #D10024;
+}
+.qty-number .qty-up:hover, .qty-number .qty-down:hover {
   background-color: #E4E7ED;
   color: #D10024;
 }

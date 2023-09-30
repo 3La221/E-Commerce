@@ -1,5 +1,6 @@
 {% extends 'store/base.html' %}
 {% load static %}
+{% load custom_filter %} 
 
 {% block content %}
 	
@@ -74,7 +75,7 @@
 								{%for item in order.orderitem_set.all%}
 								<div class="order-col">
 									<div>x{{item.quantity}} {{item.product}}</div>
-									<div>{{item.get_total}}</div>
+									<div>{{item.get_total|dinarFormat}}</div>
 								</div>
 								{% endfor %}
 							</div>
@@ -84,7 +85,7 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">{{order.get_cart_total}}</strong></div>
+								<div><strong class="order-total">{{order.get_cart_total|dinarFormat}}</strong></div>
 							</div>
 						</div>
 						

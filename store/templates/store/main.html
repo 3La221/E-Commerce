@@ -109,7 +109,7 @@
 												{% endfor %}
    											</p>
 												<h3 class="product-name"><a href="{% url 'product' product.id %}">{{product}}</a></h3>
-												<h4 class="product-price">{{product.price}}</h4>
+												<h4 class="product-price">{{product.price|dinarFormat }}</h4>
 												<div class="product-rating">
 													
 													{%  if product.average == 0 %}
@@ -205,7 +205,7 @@
 
 												{% endfor %}
    											</p>										<h3 class="product-name"><a href="#">{{product}}</a></h3>
-										<h4 class="product-price">{{product.new_price}} <del class="product-old-price">{{product.price}}</del></h4>
+										<h4 class="product-price">{{product.new_price|dinarFormat}} <del class="product-old-price">{{product.price|dinarFormat}}</del></h4>
 									</div>
 								</div>
 								<!-- /product widget -->
@@ -229,7 +229,7 @@
 
 												{% endfor %}
    											</p>										<h3 class="product-name"><a href="#">{{product}}</a></h3>
-										<h4 class="product-price">{{product.new_price}} <del class="product-old-price">{{product.price}}</del></h4>
+										<h4 class="product-price">{{product.new_price|dinarFormat}} <del class="product-old-price">{{product.price|dinarFormat}}</del></h4>
 									</div>
 								</div>
 								<!-- /product widget -->
@@ -270,7 +270,7 @@
 
 												{% endfor %}
    											</p>										<h3 class="product-name"><a href="#">{{product}}</a></h3>
-										<h4 class="product-price">{{product.price}}</h4>
+										<h4 class="product-price">{{product.price|dinarFormat}}</h4>
 									</div>
 								</div>
 								<!-- /product widget -->
@@ -295,7 +295,7 @@
 												{% endfor %}
    									</p>										
    									<h3 class="product-name"><a href="#">{{product}}</a></h3>
-									<h4 class="product-price">{{product.price}}</h4>
+									<h4 class="product-price">{{product.price|dinarFormat}}</h4>
 									</div>
 								</div>
 								<!-- /product widget -->
@@ -338,7 +338,7 @@
 												{% endfor %}
    											</p>
 										<h3 class="product-name"><a href="#">{{product}}</a></h3>
-										<h4 class="product-price">{{product.price}}</h4>
+										<h4 class="product-price">{{product.price|dinarFormat}}</h4>
 									</div>
 								</div>
 								<!-- /product widget -->
@@ -354,7 +354,7 @@
 									<div class="product-body">
 										<p class="product-category">Category</p>
 										<h3 class="product-name"><a href="#">{{product}}</a></h3>
-										<h4 class="product-price">{{product.price}}</h4>
+										<h4 class="product-price">{{product.price|dinarFormat}}</h4>
 									</div>
 								</div>
 								<!-- /product widget -->

@@ -1,11 +1,11 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Avg
-from . models import Product,Order,OrderItem,Category
+from . models import Product,Order,OrderItem,Category,Review
 import uuid,json
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from .filter import ProductFilter
-from .forms import ShippingForm
+from .forms import ShippingForm,ReviewForm
 
 
 
@@ -49,6 +49,9 @@ def main(request):
 def store(request):
 	products = Product.objects.all()
 
+	query = request.GET.get('query')
+	if query:
+		products = products.filter(title__icontains=query)
 	if request.user.is_authenticated:
 		customer = request.user.customer
 		order , created = Order.objects.get_or_create(customer=customer,complete=False)
@@ -121,13 +124,66 @@ def checkout(request,order_id):
 	return render(request,'store/checkout.html',context)
 
 def product(request,product_id):
-	product = get_object_or_404(Product,id = product_id)
 
+	product = get_object_or_404(Product,id = product_id)
+	reviews = Review.objects.filter(product=product)
 	customer = request.user.customer 
 	order,created = Order.objects.get_or_create(customer=customer,complete=False)
 	items = order.orderitem_set.all()
+	print(len(reviews))
+	stars = range(1, 6)
+	ss = []
+	five_stars = reviews.filter(rating=5)
+	four_stars = reviews.filter(rating=4)
+	three_stars = reviews.filter(rating=3)
+	two_stars = reviews.filter(rating=2)
+	one_stars = reviews.filter(rating=1)
 
-	context = {'product':product,'order':order,'items':items}
+	ss.append(len(five_stars))
+	ss.append(len(four_stars))
+	ss.append(len(three_stars))
+	ss.append(len(two_stars))
+	ss.append(len(one_stars))
+
+
+	paginator = Paginator(reviews,4)
+	page_number = request.GET.get("page")
+	page_obj = paginator.get_page(page_number)
+
+	
+
+	if request.method == "POST":
+		form = ReviewForm(request.POST)
+		if form.is_valid:
+			f = form.save(commit=False)
+			f.product = product
+			f.save()
+		context = {
+	'product':product,
+	'order':order,
+	'items':items,
+	'reviews':reviews,
+	'stars':stars,
+	'ss':ss,
+	'page_obj':page_obj,
+	'form':form
+	}
+		return render(request,'store/product.html',context)
+	form = ReviewForm()
+
+
+
+
+	context = {
+	'product':product,
+	'order':order,
+	'items':items,
+	'reviews':reviews,
+	'stars':stars,
+	'ss':ss,
+	'page_obj':page_obj,
+	'form':form
+	}
 	return render(request,'store/product.html',context)
 
 def resetOrder(request):
