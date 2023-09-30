@@ -44,10 +44,12 @@ class Review(models.Model):
 		default=uuid.uuid4,unique=True,
 		primary_key=True,editable=False
 		)
+	name = models.CharField(max_length=40,blank=True)
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
 	description = models.TextField(null=True,blank=True)
 	rating = models.IntegerField(default=5)
 	created = models.DateTimeField(auto_now_add=True)
+	
 
 	def __str__(self):
 		return self.name + "review"
