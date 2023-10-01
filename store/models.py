@@ -44,7 +44,7 @@ class Review(models.Model):
 		default=uuid.uuid4,unique=True,
 		primary_key=True,editable=False
 		)
-	name = models.CharField(max_length=40,blank=True)
+	name = models.CharField(max_length=40,blank=False)
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
 	description = models.TextField(null=True,blank=True)
 	rating = models.IntegerField(default=5)

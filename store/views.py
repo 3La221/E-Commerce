@@ -168,7 +168,7 @@ def product(request,product_id):
 	'page_obj':page_obj,
 	'form':form
 	}
-		return render(request,'store/product.html',context)
+		return redirect('product',product_id=product.id)
 	form = ReviewForm()
 
 
