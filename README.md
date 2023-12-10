@@ -34,4 +34,5 @@ This project is an E-commerce website built using the Django framework, HTML, CS
 - Display average ratings for products.
 
 ![Screenshot 2023-10-05 095335](https://github.com/3La221/E-Commerce/assets/126871601/7fdea846-2d81-4152-a60a-15afe35d4dbe)
+![Screenshot 2023-10-05 095115](https://github.com/3La221/E-Commerce/assets/126871601/903dfc9f-d43b-49f0-b6a2-0a8656d5ca65)
 
